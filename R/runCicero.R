@@ -603,7 +603,7 @@ generate_cicero_models <- function(cds,
     cov_mat <- cov(t(vals))
     diag(cov_mat) <- diag(cov_mat) + 1e-4
 
-    GL <- glasso::glasso(cov_mat, rho_mat)
+    GL <- glassoFast::glassoFast(cov_mat, rho_mat)
     colnames(GL$w) <- row.names(GL$w) <- row.names(vals)
     colnames(GL$wi) <- row.names(GL$wi) <- row.names(vals)
     return(GL)
@@ -752,7 +752,7 @@ find_distance_parameter <- function(dist_mat,
 
     rho <- get_rho_mat(dist_mat, distance_parameter, s)
 
-    GL <- glasso::glasso(cov_mat, rho)
+    GL <- glassoFast::glassoFast(cov_mat, rho)
     big_entries <- sum(dist_mat > distance_constraint)
 
     if (((sum(GL$wi[dist_mat > distance_constraint] != 0)/big_entries) > 0.05) |

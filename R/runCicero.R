@@ -967,9 +967,6 @@ find_overlapping_ccans <- function(ccan_assignments, min_overlap=1) {
 
 
 cicero_glasso_fast <- function(cov_mat, rho_mat, thr = 1e-4) {
-  # glassoFast wants a matrix called "lambda" – it is identical to rho_mat.
-  # The function automatically adds a (tiny) ridge term if you give it via
-  # the `ridge` argument; we therefore do NOT modify cov_mat ourselves.
   out <- glassoFast::glassoFast(cov_mat,
                                 rho_mat,
                                 thr = thr)   # keep quiet
